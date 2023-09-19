@@ -1,3 +1,3 @@
-export const test = () => {
-    console.log('test successfull');
+export const test = (req, res) => {
+    res.json('Success!');
 };

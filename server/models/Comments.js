@@ -18,4 +18,4 @@ const CommentSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-export default mongoose.Model('Comment', CommentSchema);
+export default mongoose.model('Comment', CommentSchema);

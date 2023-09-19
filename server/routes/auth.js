@@ -1,6 +1,8 @@
 import express from 'express';
-import {} from '../controllers/video.js';
+import { signup } from '../controllers/auth.js';
 
 const router = express.Router();
+
+router.post('/signup', signup);
 
 export default router;
