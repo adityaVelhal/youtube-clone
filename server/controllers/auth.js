@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import Users from '../models/Users.js';
 import bcrypt from 'bcrypt';
-import { createError } from '../error.js';
+import { createError } from '../middleware/error.js';
 import jwt from 'jsonwebtoken';
 
 export const signup = async (req, res, next) => {
