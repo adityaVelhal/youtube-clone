@@ -13,11 +13,11 @@ import { verifyToken } from '../middleware/verifyToken.js';
 const router = express.Router();
 
 router.put('/:id', verifyToken, update);
-router.delete('/:id', deleteUser);
+router.delete('/:id', verifyToken, deleteUser);
 router.get('/find/:id', getUser);
-router.put('/sub/:id', subscribe);
-router.put('/unsub/:id', unsubscribe);
-router.put('/:id', like);
-router.put('/:id', dislike);
+router.put('/sub/:id', verifyToken, subscribe);
+router.put('/unsub/:id', verifyToken, unsubscribe);
+router.put('/like/:id', verifyToken, like);
+router.put('/dislike/:id', verifyToken, dislike);
 
 export default router;

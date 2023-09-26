@@ -18,12 +18,13 @@ const UserSchema = new mongoose.Schema(
         img: {
             type: String,
         },
-        Subscribers: {
+        subscribers: {
             type: Number,
             default: 0,
         },
         subscribedUsers: {
             type: [String],
+            default: [],
         },
     },
     { timestamps: true }
