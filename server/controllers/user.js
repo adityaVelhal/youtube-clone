@@ -1,5 +1,6 @@
 import { createError } from '../middleware/error.js';
 import User from '../models/Users.js';
+import Video from '../models/Video.js';
 
 export const update = async (req, res, next) => {
     try {
@@ -85,6 +86,15 @@ export const unsubscribe = async (req, res, next) => {
 
 export const like = async (req, res, next) => {
     try {
+        let video = await Video.findById(req.params.id);
+        if (!video) return next(createError(404, 'Video not found'));
+
+        if (video._doc.likes.includes(req.user.id))
+            return res.status(200).json('Already liked the video');
+        else {
+            video._doc.likes.push(req.user.id);
+            await video.save();
+        }
     } catch (err) {
         next(err);
     }
@@ -92,6 +102,17 @@ export const like = async (req, res, next) => {
 
 export const dislike = async (req, res, next) => {
     try {
+        let video = await Video.findById(req.params.id);
+        if (!video) return next(createError(404, 'Video not found'));
+
+        if (video._doc.dislikes.includes(req.user.id))
+            return res.status(200).json('Already disliked the video');
+        else {
+            video._doc.dislikes.push(req.user.id);
+            await video.save();
+
+            res.status(200).json('Disliked');
+        }
     } catch (err) {
         next(err);
     }
