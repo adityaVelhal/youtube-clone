@@ -82,9 +82,8 @@ export const random = async (req, res, next) => {
 
 export const trends = async (req, res, next) => {
     try {
-        const video = await Video.findById(req.params.id);
-        if (!video) return next(createError(401, 'Video not found'));
-        res.status(200).json(video);
+        const videos = await Video.aggregate([{$sample: {size:40}}])
+        res.status(200).json(videos);
     
     } catch (error) {
         return next(error);
